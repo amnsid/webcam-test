@@ -195,8 +195,8 @@ const CameraCapture = () => {
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
-          forceScreenshotSourceSize={true} // Add this line to prevent mirroring
-          videoConstraints={{ facingMode: cameraFacingMode }}
+          videoConstraints={{ facingMode: cameraFacingMode,
+            mirrored: false }} // Add this line to prevent mirroring
         />
       </div>
 
