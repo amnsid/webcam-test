@@ -196,7 +196,7 @@ const CameraCapture = () => {
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           videoConstraints={{ facingMode: cameraFacingMode,
-            mirrored: false, }} // Add this line to prevent mirroring
+            flipHorizontal: true }} // Add this line to prevent mirroring
         />
       </div>
 
