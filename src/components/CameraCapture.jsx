@@ -165,112 +165,42 @@
 
 
 // eslint-disable-next-line no-unused-vars
-// import React, { useState, useRef } from 'react';
-// import Webcam from 'react-webcam';
-
-// const CameraCapture = () => {
-//   const webcamRef = useRef(null);
-//   const [capturedImage, setCapturedImage] = useState(null);
-//   const [storeArray, setStoreArray] = useState([]);
-//   const [store2Array, setStore2Array] = useState([]);
-//   const [cameraFacingMode, setCameraFacingMode] = useState('user'); // 'user' for front camera, 'environment' for back camera
-
-//   const capture = () => {
-//     const imageSrc = webcamRef.current.getScreenshot();
-//     setCapturedImage(imageSrc);
-//     setStoreArray([...storeArray, imageSrc]);
-//     setStore2Array([...store2Array, storeArray]);
-//   };
-
-//   const switchCamera = () => {
-//     // Toggle between 'user' (front camera) and 'environment' (back camera)
-//     setCameraFacingMode((prevMode) => (prevMode === 'user' ? 'environment' : 'user'));
-//   };
-
-//   return (
-//     <div className="flex flex-col items-center">
-//       {/* Camera Screen */}
-//       <div className="w-1/2 sm:w-1/3 p-4">
-//         <Webcam
-//           audio={false}
-//           ref={webcamRef}
-//           screenshotFormat="image/jpeg"
-//           videoConstraints={{ facingMode: cameraFacingMode,
-//             mirrored: false }} // Add this line to prevent mirroring
-//         />
-//       </div>
-
-//       {/* Capture Button */}
-//       <button
-//         className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-4"
-//         onClick={capture}
-//       >
-//         Capture
-//       </button>
-
-//       {/* Switch Camera Button */}
-//       <button
-//         className="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded mt-4"
-//         onClick={switchCamera}
-//       >
-//         Switch Camera
-//       </button>
-
-//       {/* Display Captured Images */}
-//       <div className="flex flex-row flex-wrap max-w-5xl mt-4">
-//         {capturedImage &&
-//           storeArray.map((img, index) => (
-//             <img
-//               key={index}
-//               src={img}
-//               alt="Captured"
-//               className="max-w-xs max-h-80 min-h-80 p-2"
-//             />
-//           ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CameraCapture;
-
-
-
-
-
-
-
-
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 
 const CameraCapture = () => {
   const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
-  const [cameraFacingMode, setCameraFacingMode] = useState('user');
+  const [storeArray, setStoreArray] = useState([]);
+  const [store2Array, setStore2Array] = useState([]);
+  const [cameraFacingMode, setCameraFacingMode] = useState('user'); // 'user' for front camera, 'environment' for back camera
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setCapturedImage(imageSrc);
+    setStoreArray([...storeArray, imageSrc]);
+    setStore2Array([...store2Array, storeArray]);
   };
 
   const switchCamera = () => {
+    // Toggle between 'user' (front camera) and 'environment' (back camera)
     setCameraFacingMode((prevMode) => (prevMode === 'user' ? 'environment' : 'user'));
   };
 
   return (
     <div className="flex flex-col items-center">
+      {/* Camera Screen */}
       <div className="w-1/2 sm:w-1/3 p-4">
         <Webcam
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
-          forceScreenshotSourceSize={true} // Non-mirrored view
-          videoConstraints={{ facingMode: cameraFacingMode }}
+          videoConstraints={{ facingMode: cameraFacingMode,
+            mirrored: false }} // Add this line to prevent mirroring
         />
       </div>
 
+      {/* Capture Button */}
       <button
         className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-4"
         onClick={capture}
@@ -278,6 +208,7 @@ const CameraCapture = () => {
         Capture
       </button>
 
+      {/* Switch Camera Button */}
       <button
         className="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded mt-4"
         onClick={switchCamera}
@@ -285,17 +216,28 @@ const CameraCapture = () => {
         Switch Camera
       </button>
 
+      {/* Display Captured Images */}
       <div className="flex flex-row flex-wrap max-w-5xl mt-4">
-        {capturedImage && (
-          <img
-            src={capturedImage}
-            alt="Captured"
-            className="max-w-xs max-h-80 min-h-80 p-2"
-          />
-        )}
+        {capturedImage &&
+          storeArray.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt="Captured"
+              className="max-w-xs max-h-80 min-h-80 p-2"
+            />
+          ))}
       </div>
     </div>
   );
 };
 
 export default CameraCapture;
+
+
+
+
+
+
+
+
